@@ -29,10 +29,10 @@ jobs:
       - name: Build Angular app
         run: npm run build -- --base-href "/MyDashboard/"
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist/
+      - - name: Upload artifact
+          uses: actions/upload-pages-artifact@v3
+          with:
+            path: dist/game-time-app/browser
 
   deploy:
     environment:
