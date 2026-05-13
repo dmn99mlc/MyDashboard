@@ -1,0 +1,131 @@
+<div class="layout">
+
+  <div class="table-container">
+
+    <h1>Rejestr czasu gry</h1>
+
+    <table>
+      <thead>
+      <tr>
+        <th>Data</th>
+        <th>Przydział czasu</th>
+        <th>Czas gry</th>
+        <th>Akcje</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let entry of data; let i = index">
+        <td>{{ entry.date }}</td>
+        <td>{{ entry.allocatedTime }}</td>
+        <td>{{ entry.playTime }}</td>
+
+        <td>
+          <button
+            class="delete-btn"
+            (click)="removeEntry(i)"
+          >
+            Usuń
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="form-container">
+
+    <h2>Dodaj wpis</h2>
+
+    <div class="form-group">
+      <label>Data</label>
+      <input
+        type="text"
+        placeholder="DD-MM-YYYY"
+        [(ngModel)]="newEntry.date"
+      >
+    </div>
+
+    <div class="form-group">
+      <label>Przydział czasu</label>
+      <input
+        type="time"
+        [(ngModel)]="newEntry.allocatedTime"
+      >
+    </div>
+
+    <div class="form-group">
+
+      <label>Czas gry</label>
+
+      <input
+        type="text"
+        [(ngModel)]="newEntry.playTime"
+      />
+
+      <div class="timer-box">
+
+        <div class="timer-display">
+          {{ secondsToTime(timerSeconds) }}
+        </div>
+
+        <div class="timer-buttons">
+
+          <button
+            type="button"
+            class="timer-btn start-btn"
+            (click)="startTimer()"
+          >
+            Start
+          </button>
+
+          <button
+            type="button"
+            class="timer-btn stop-btn"
+            (click)="stopTimer()"
+          >
+            Stop
+          </button>
+
+          <button
+            type="button"
+            class="timer-btn reset-btn"
+            (click)="resetTimer()"
+          >
+            Reset
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <button (click)="addEntry()">
+      Dodaj
+    </button>
+
+    <div class="summary-container">
+
+      <h3>Podsumowanie</h3>
+
+      <table class="summary-table">
+        <tbody>
+        <tr>
+          <td>Suma przydziału</td>
+          <td>{{ getTotalAllocatedTime() }}</td>
+        </tr>
+
+        <tr>
+          <td>Suma czasu gry</td>
+          <td>{{ getTotalPlayTime() }}</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+
